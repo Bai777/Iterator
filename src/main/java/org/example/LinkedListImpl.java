@@ -7,7 +7,6 @@ public class LinkedListImpl<T> implements LinkedList<T> {
     protected class Node<T> {
         protected T value;
         protected Node<T> next;
-//        protected Node<T> prev; // previous
 
         public Node(T value) {
             this.value = value;
@@ -134,7 +133,50 @@ public class LinkedListImpl<T> implements LinkedList<T> {
     @Override
     public Iterator<T> iterator() {
         // TODO: 22.09.2022 Реализовать итератор для связного списка.
-        throw new UnsupportedOperationException("Not implemented yet");
+//        throw new UnsupportedOperationException("Not implemented yet");
+        return new MyIterator<>(this);
+    }
+
+    private class MyIterator<T> implements Iterator<T> {
+
+        LinkedListImpl<T>.Node<T> currentNode;
+        T next;
+        T current;
+        LinkedListImpl<T> link;
+
+        public MyIterator(LinkedListImpl<T> thelink) {
+            link = thelink;
+            currentNode = link.head;
+            current = link.getFirst();
+            if (current != null) {
+                next = currentNode.next.value;
+            }
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (current != null) {
+                return next != null;
+            }
+            return false;
+        }
+
+        @Override
+        public T next() {
+            current = next;
+            currentNode = currentNode.next;
+            if (currentNode.next != null) {
+                next = currentNode.next.value;
+            } else {
+                next = null;
+            }
+            return currentNode.value;
+        }
+
+        @Override
+        public void remove() {
+            Iterator.super.remove();
+        }
     }
 
     @Override
