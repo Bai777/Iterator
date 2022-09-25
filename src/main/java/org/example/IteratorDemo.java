@@ -3,6 +3,7 @@ package org.example;
 import java.util.*;
 
 public class IteratorDemo {
+
     public static void main(String[] args) {
         Collection<Integer> collection = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
 
@@ -20,6 +21,8 @@ public class IteratorDemo {
             System.out.println(in);
         }
     }
+
+
 
     private static void iterator(Collection<Integer> collection) {
         Iterator<Integer> iterator = collection.iterator();
